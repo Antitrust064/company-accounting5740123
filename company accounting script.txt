@@ -1,0 +1,34 @@
+import datetime
+
+def calculate_expense_per_day(expense):
+    total_days = (datetime.datetime.now() + datetime.timedelta(days=1)).day
+    expense_per_day = expense / total_days
+    return expense_per_day
+
+def calculate_gross_profit(gross_profit, expense_per_day):
+    today = datetime.datetime.now()
+    if today.weekday() < 5:  # Monday to Friday (weekday)
+        gross_profit *= 1.5  # 50% higher profit on weekdays
+    net_profit = gross_profit - expense_per_day
+    return net_profit
+
+employee_salary = 500000
+rent_equipment_infrastructure = 200000
+miscellaneous = 50000
+
+employee_salary_per_day = calculate_expense_per_day(employee_salary)
+rent_equipment_infrastructure_per_day = calculate_expense_per_day(rent_equipment_infrastructure)
+miscellaneous_per_day = calculate_expense_per_day(miscellaneous)
+
+gross_profit = 1000000
+
+net_profit = calculate_gross_profit(gross_profit, employee_salary_per_day + rent_equipment_infrastructure_per_day + miscellaneous_per_day)
+
+# Print the expenses on a daily basis with expense type
+print("Expense per day:")
+print("Employee Salary:", employee_salary_per_day)
+print("Rent, Equipment, Infrastructure:", rent_equipment_infrastructure_per_day)
+print("Miscellaneous:", miscellaneous_per_day)
+
+# Print the net profit
+print("Net Profit: $", net_profit)
